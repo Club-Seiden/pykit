@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='pykit',
@@ -8,7 +8,7 @@ setup(
     author="Joshua Hall, Stephanie Rabbini",
     author_email='josh@seidengroup.com, steph@seidengroup.com',
     license='MIT',
-    packages=['pykit'],
+    packages=find_packages(),
     zip_safe=False
 )
 
