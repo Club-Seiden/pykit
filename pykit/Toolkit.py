@@ -1,6 +1,3 @@
-import requests
-
-
 class Toolkit:
     """
     Python Toolkit for interacting with the IBM i via different transports.
