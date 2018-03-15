@@ -11,6 +11,7 @@ class TestHttpConnection(unittest.TestCase):
                 os.environ['PK_DB2SOCK_USER'], os.environ['PK_DB2SOCK_PASS']))
 
     def test_add_payload(self):
+        orig_size = len(self.connection.payload)
         payload = {
             'pgm': [
                 {'name': 'HELLO', 'lib': 'DB2JSON'},
@@ -18,7 +19,7 @@ class TestHttpConnection(unittest.TestCase):
             ]
         }
         self.connection.add(payload)
-        self.assertIn(payload, self.connection.payload)
+        self.assertTrue(len(self.connection.payload) - orig_size == 1)
 
     def test_execute_payload(self):
         response = self.connection.execute()
