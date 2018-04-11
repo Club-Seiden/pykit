@@ -12,7 +12,7 @@ class HttpConnection:
         self.db2sock_auth = db2sock_auth
         self.db2sock_rest_url = db2sock_rest_url
         self.payload = []
-        self.test_db2sock()
+        self.__test_connection()
 
     def toolkit(self):
         """
@@ -45,7 +45,7 @@ class HttpConnection:
         self.payload = []
         return response
 
-    def test_db2sock(self):
+    def __test_connection(self):
         """
         Test that the DB2Sock REST transport exists and works properly
         with the given configuration. Raise an error if not.
