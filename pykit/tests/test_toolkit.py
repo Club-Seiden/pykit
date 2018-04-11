@@ -1,6 +1,6 @@
 import unittest
 import os
-from .transport.http import connect
+from pykit.transport.http import connect
 
 
 class TestHttpConnection(unittest.TestCase):
