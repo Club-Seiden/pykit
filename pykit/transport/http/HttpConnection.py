@@ -25,7 +25,7 @@ class HttpConnection:
         """
         Execute the payload and then clear the payload.
 
-        :return: string
+        :return: dict
         """
         response = requests.post(
             self.db2sock_rest_url, json=payload, auth=self.db2sock_auth)
