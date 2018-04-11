@@ -25,11 +25,14 @@ class HttpConnection:
         """
         Execute the payload and then clear the payload.
 
-        :return: Response
+        :return: string
         """
         response = requests.post(
             self.db2sock_rest_url, json=payload, auth=self.db2sock_auth)
-        return response
+        if not response.ok:
+            raise TransportError("There was an error while executing the payload.")
+
+        return response.json()
 
     def __test_connection(self):
         """
@@ -38,12 +41,11 @@ class HttpConnection:
 
         :return: void
         """
-        self.add({
+        toolkit = self.toolkit()
+        toolkit.add({
             'pgm': [
                 {'name': 'HELLO', 'lib': 'DB2JSON'},
                 {'s': {'name': 'char', 'type': '128a', 'value': 'Hi there'}}
             ]
         })
-        response = self.execute()
-        if not response.ok:
-            raise ConnectionError("DB2Sock REST Transport failed to connect.")
+        response = toolkit.execute()

@@ -12,7 +12,7 @@ class TestHttpConnection(unittest.TestCase):
         self.toolkit = self.connection.toolkit()
 
     def test_add_payload(self):
-        orig_size = len(self.connection.payload)
+        orig_size = len(self.toolkit.payload)
         payload = {
             'pgm': [
                 {'name': 'HELLO', 'lib': 'DB2JSON'},
@@ -20,11 +20,11 @@ class TestHttpConnection(unittest.TestCase):
             ]
         }
         self.toolkit.add(payload)
-        self.assertTrue(len(self.connection.payload) - orig_size == 1)
+        self.assertTrue(len(self.toolkit.payload) - orig_size == 1)
 
     def test_execute_payload(self):
         response = self.toolkit.execute()
-        self.assertEqual(response.ok, True)
+        self.assertTrue(response)
 
 
 if __name__ == '__main__':
