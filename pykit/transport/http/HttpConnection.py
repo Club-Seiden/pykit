@@ -11,7 +11,6 @@ class HttpConnection:
     def __init__(self, db2sock_rest_url, db2sock_auth):
         self.db2sock_auth = db2sock_auth
         self.db2sock_rest_url = db2sock_rest_url
-        self.payload = []
         self.__test_connection()
 
     def toolkit(self):
@@ -22,27 +21,14 @@ class HttpConnection:
         """
         return Toolkit(self)
 
-    def add(self, o):
-        """
-        Add an object to the payload that will be passed to DB2Sock.
-
-        :param o: Object to be added
-        :return: void
-        """
-        if isinstance(o, dict):
-            self.payload.append(o)
-        else:
-            raise TypeError('Only dictionaries are supported right now.')
-
-    def execute(self):
+    def execute(self, payload):
         """
         Execute the payload and then clear the payload.
 
         :return: Response
         """
         response = requests.post(
-            self.db2sock_rest_url, json=self.payload, auth=self.db2sock_auth)
-        self.payload = []
+            self.db2sock_rest_url, json=payload, auth=self.db2sock_auth)
         return response
 
     def __test_connection(self):

@@ -4,16 +4,19 @@ class Toolkit:
     """
     def __init__(self, connection):
         self.connection = connection
-        self.payload = ''
+        self.payload = []
 
     def add(self, o):
         """
-        Add object to the transport's payload.
+        Add an object to the payload that will be passed to the connection.
 
-        :param o: Object to be added to the transport
+        :param o: Object to be added
         :return: void
         """
-        self.connection.add(o)
+        if isinstance(o, dict):
+            self.payload.append(o)
+        else:
+            raise TypeError('Only dictionaries are supported right now.')
 
     def execute(self):
         """
@@ -21,4 +24,6 @@ class Toolkit:
 
         :return: void
         """
-        return self.connection.execute()
+        result = self.connection.execute(self.payload)
+        self.payload = []
+        return result
