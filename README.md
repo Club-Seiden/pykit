@@ -1,106 +1,62 @@
-# README #
+# README
 
-### Python Toolkit ###
-The Python is a Python wrapper over the XMLSERVICE open source project from IBM. 
-This python .whl/.egg is now jointly maintained by IBM and the KrengelTech Litmis team. 
-All future work will be done in this repo.
+### Python Toolkit
 
-###Documentation###
-* [doc](http://python-itoolkit.readthedocs.io/en/latest)
-* [YiPs documentation](http://yips.idevcloud.com/wiki/index.php/XMLSERVICE/Python)
+PyKit is a Python wrapper for [DB2Sock](https://bitbucket.org/litmis/db2sock).
 
-###New whl/egg (laptop, etc.)###
-* http://yips.idevcloud.com/wiki/index.php/XMLSERVICE/Python
+> As of major version zero, PyKit only supports an HTTP REST transport. Before
+trying to use PyKit, please be sure to have DB2Sock up and running with an HTTP
+transport available. Follow the
+[DB2Sock Instlalation Instructions](https://bitbucket.org/litmis/db2sock#markdown-header-yips-pre-compiled-test-vesion)
+and
+[setup](https://bitbucket.org/litmis/db2sock/src/8361279737df4f9a7cffe02fa164ad21f1d0c2b0/toolkit/fastcgi/?at=master)
+either nginx or apache.
 
+### PyKit Setup
 
-###Installation###
+PyKit is not an official Python Package quite yet, so install it like any
+package that is in development.
 
-```
-=====
-IBM pythons (PTF)
-=====
-examples:
-pip3 uninstall itoolkit
-pip3 install dist/itoolkit*34m-os400*.whl
+#### Clone repository
 
-pip2 uninstall itoolkit
-pip2 install dist/itoolkit*27m-os400*.whl
+You'll need the PyKit source to install
 
-
-======
-perzl pythons
-======
-examples:
-rm  -R /opt/freeware/lib/python2.6/site-packages/itoolkit*
-easy_install dist/itoolkit*2.6-os400*.egg
-
-rm  -R /opt/freeware/lib/python2.7/site-packages/itoolkit*
-easy_install-2.7 dist/itoolkit*2.7-os400*.egg
-
-
-======
-laptop/remote pythons
-======
-examples:
-pip uninstall itoolkit
-pip install dist/itoolkit-lite*py2-none*.whl
--- or --
-easy_install dist/itoolkit-lite*2.7.egg
-
+```commandline
+$ git clone git@github.com:Club-Seiden/pykit.git
 ```
 
-###python3 UnicodeDecodeError: ascii codec ###
+#### Use pip3 to install PyKit
 
-python3 only. Please use test fix  python3-itoolkit-1.3.zip at Yips.
+PyKit uses Python 3, so be sure to use `pip3` when installing.
 
-* [YIPs python3-itoolkit-1.3.zip]( http://yips.idevcloud.com/wiki/index.php/XMLSERVICE/Python) - Download .whl (test only).
-
-```
-pip3 install dist/*cp34m*.whl
-```
-
-Example issue:
-
-```
-Traceback (most recent call last):
-  File "italy.py", line 16, in <module>
-  File "/QOpenSys/QIBM/ProdData/OPS/Python3.4/lib/python3.4/site-packages/itoolkit/itoolkit.py", line 1099, in call
-    itrans.call(self)
-  File "/QOpenSys/QIBM/ProdData/OPS/Python3.4/lib/python3.4/site-packages/itoolkit/lib/ilibcall.py", line 88, in call
-    return itoolkit.itoollib.xmlservice(itool.xml_in(),self.ctl,self.ipc,self.ebcdic_ccsid,self.pase_ccsid)
-UnicodeDecodeError: 'ascii' codec can't decode byte 0xc3 in position 44: ordinal not in range(128)
+```commandline
+$ cd pykit
+$ pip3 install ./pykit
 ```
 
+> If you're having trouble installing a new version of PyKit, try running
+install with `--upgrade`
 
-
-###Builder Notes:###
-```
-=======
-Builder:
-=======
-./make-whl.sh [34|27|26|34-lite|27-lite|26-lite]
-./make-egg.sh [34|27|26|34-lite|27-lite|26-lite]
-
-examples:
-./make-whl.sh 34 27 34-lite 27-lite
-./make-egg.sh 34 27 34-lite 27-lite
-
-make doc:
-> python make_doc.py
-
-Update version:
-
-> [bumpversion](https://pypi.python.org/pypi/bumpversion) minor
-
-Can be problem for egg builds.
-
-unable to execute '/QOpenSys/python/lib/python3.4/config/ld_so_aix': No such file or directory
-error: command '/QOpenSys/python/lib/python3.4/config/ld_so_aix' failed with exit status 1
-ln -s /QOpenSys/QIBM/ProdData/OPS/Python3.4/lib/python3.4/config-3.4m /QOpenSys/QIBM/ProdData/OPS/Python3.4/lib/python3.4/config
-
-/QOpenSys/ranger/home/RANGER/python
-/QOpenSys/ranger2/home/ranger2/python
+```commandline
+$ pip3 install --upgrade ./pykit
 ```
 
-#License
-MIT.  View [`LICENSE`](https://bitbucket.org/litmis/python-itoolkit/src) file.
+### Testing PyKit
+
+Unit tests are in place for PyKit. To run them, use the normal command.
+
+```commandline
+$ cd /path/to/source/of/pykit/
+$ python3 -m unittest
+```
+
+> PyKit requires the transport information be setup to run tests. These are
+setup with bash environment variables. If you're running the test for the 
+first time and don't have the bash variables defined somewhere, you'll
+probably need to do something like:
+
+```commandline
+$ export PK_DB2SOCK_URL='http://127.0.0.1:8088/db2json.db2'; export PK_DB2SOCK_USER=db2_user; export PK_DB2SOCK_PASS=db2_password;
+$ cd /path/to/source/of/pykit
+$ python3 -m unittest
+```
