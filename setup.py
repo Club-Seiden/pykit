@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pykit',
-    version='0.1.0',
+    version='0.2.0',
     description='IBM i toolkit',
     url='https://github.com/Club-Seiden/pykit',
     author="Joshua Hall, Stephanie Rabbani",
