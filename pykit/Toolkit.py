@@ -13,17 +13,30 @@ class Toolkit:
         :param o: Object to be added
         :return: void
         """
-        if isinstance(o, dict):
-            self.payload.append(o)
-        else:
-            raise TypeError('Only dictionaries are supported right now.')
+        self.payload.append(o)
 
     def execute(self):
         """
         Execute the transport's payload.
 
-        :return: void
+        :return: object
         """
-        result = self.connection.execute(self.payload)
+        payload = []
+        for p in self.payload:
+            try:
+                payload.append(p.get_payload())
+            except AttributeError:
+                """
+                p does not have get_payload
+                assume that the payload is raw json to be sent straight to the transport
+                """
+                payload = self.payload
+
+        try:
+            result = self.connection.execute(payload)
+        except TypeError:
+            print("The payload was not structured properly.")
+            return {}
+
         self.payload = []
         return result
