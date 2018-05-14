@@ -33,6 +33,5 @@ class TestCommand(unittest.TestCase):
         self.assertTrue(response)
 
 
-        self.assertTrue(response)
 if __name__ == '__main__':
     unittest.main()
