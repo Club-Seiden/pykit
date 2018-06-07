@@ -4,7 +4,7 @@ from pykit.transport.http import connect
 from pykit import Character, Program, Integer, Float
 
 
-class TestCharacter(unittest.TestCase):
+class TestProgram(unittest.TestCase):
     def setUp(self):
         char = Character("char", 128, "Hi there")
         self.hello_prog = Program("HELLO", "DB2JSON")
