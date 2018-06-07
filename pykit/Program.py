@@ -10,7 +10,7 @@ class Program:
             "pgm": [{"name": name, "lib": library}]
         }
 
-    def addParameter(self, parameter):
+    def add_parameter(self, parameter):
         """
 
         :param parameter: Parameter to be added
@@ -19,7 +19,11 @@ class Program:
         self.parameters.append(parameter)
 
     def get_payload(self):
-        for p in self.parameters:
-            self.payload["pgm"].append(p.get_payload())
+        if len(self.parameters) is 1:
+            self.payload["pgm"].append({"s": self.parameters[0].get_payload()})
+        else:
+            self.payload["pgm"].append({"s":[]})
+            for p in self.parameters:
+                self.payload["pgm"][-1]["s"].append(p.get_payload())
 
         return self.payload
