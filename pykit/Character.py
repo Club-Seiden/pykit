@@ -2,7 +2,7 @@ class Character:
     """
     Object for IBM i Character.
     """
-    def __init__(self, length, value):
+    def __init__(self, name, length, value):
         """
         How much error checking do we want here?
         Should we check that length is positive?
@@ -14,9 +14,10 @@ class Character:
         """
         self.length = length
         self.value = value
-        self.payload = {"s":{"name":"char"}}
+        self.name = name
+        self.payload = {"name":name}
 
     def get_payload(self):
-        self.payload['s']['type'] = str(self.length) + 'a'
-        self.payload['s']['value'] = self.value
+        self.payload['type'] = str(self.length) + 'a'
+        self.payload['value'] = self.value
         return self.payload
