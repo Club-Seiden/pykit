@@ -11,7 +11,7 @@ class ClCommand:
 
     def get_payload(self):
         if self.screen_output:
-            self.payload["cmd"]["qsh"] = self.command
+            self.payload["cmd"]["qsh"] = "system " + self.command
         elif any(x in self.command for x in ["&", "?"]):
             self.payload["cmd"]["rexx"] = self.command
         else:
