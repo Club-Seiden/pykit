@@ -1,5 +1,5 @@
 __version__ = "0.2.0"
-from .Command import Command
+from .ClCommand import ClCommand
 from .Integer import Integer
 from .Float import Float
 from .Character import Character

@@ -1,4 +1,4 @@
-class Command:
+class ClCommand:
     """
     Object for calling an IBM i CL command.
     """
@@ -11,7 +11,7 @@ class Command:
 
     def get_payload(self):
         if self.screen_output:
-            self.payload["cmd"]["qsh"] = self.command
+            self.payload["cmd"]["qsh"] = "system " + self.command
         elif any(x in self.command for x in ["&", "?"]):
             self.payload["cmd"]["rexx"] = self.command
         else:
