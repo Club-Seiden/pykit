@@ -24,7 +24,6 @@ class TestServiceProgram(unittest.TestCase):
         toolkit = connection.toolkit()
         toolkit.add(self.hello_prog)
         response = toolkit.execute()
-        print(response)
         self.assertEqual(response, {"script": [{"pgm": ["HELLOSRV", "DB2JSON", "HELLO", {"char": "Hello World"}]}]})
 
 
