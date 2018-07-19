@@ -1,4 +1,4 @@
-class Command:
+class ClCommand:
     """
     Object for calling an IBM i CL command.
     """
