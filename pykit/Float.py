@@ -1,4 +1,5 @@
-class Float:
+import Parameter
+class Float(Parameter):
     """
     Object for IBM i Float.
     """
@@ -21,5 +22,5 @@ class Float:
 
     def get_payload(self):
         self.payload['type'] = str(self.length) + 'f' + str(self.precision)
-        self.payload['value'] = self.value
+        Parameter.get_payload(self);
         return self.payload

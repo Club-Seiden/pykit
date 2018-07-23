@@ -1,4 +1,5 @@
-class Character:
+import Parameter
+class Character(Parameter):
     """
     Object for IBM i Character.
     """
@@ -19,5 +20,5 @@ class Character:
 
     def get_payload(self):
         self.payload['type'] = str(self.length) + 'a'
-        self.payload['value'] = self.value
+        Parameter.get_payload(self);
         return self.payload

@@ -1,4 +1,5 @@
-class Integer:
+import Parameter
+class Integer(Parameter):
     """
     Object for IBM i Integer.
     """
@@ -20,5 +21,6 @@ class Integer:
 
     def get_payload(self):
         self.payload['type'] = str(self.length) + ('i' if self.signed else 'u') + '0'
-        self.payload['value'] = self.value
+        Parameter.get_payload(self);
+        
         return self.payload

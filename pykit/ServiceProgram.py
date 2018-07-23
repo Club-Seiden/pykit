@@ -1,4 +1,6 @@
-class ServiceProgram:
+import Program
+
+class ServiceProgram(Program):
     """
     Object for calling an IBM i Program.
     """
@@ -10,20 +12,13 @@ class ServiceProgram:
             "pgm": [{"name": name, "lib": library, "func": function}]
         }
 
-    def add_parameter(self, parameter):
+    def add_return(self, parameter):
         """
 
-        :param parameter: Parameter to be added
+        :param parameter: Return parameter to be added
         :return:
         """
+        parameter.isReturn = True
         self.parameters.append(parameter)
-
-    def get_payload(self):
-        if len(self.parameters) is 1:
-            self.payload["pgm"].append({"s": self.parameters[0].get_payload()})
-        else:
-            self.payload["pgm"].append({"s":[]})
-            for p in self.parameters:
-                self.payload["pgm"][-1]["s"].append(p.get_payload())
-
-        return self.payload
+        
+    

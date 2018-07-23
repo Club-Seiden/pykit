@@ -7,13 +7,22 @@ from pykit import Character, ServiceProgram, Integer, Float
 class TestServiceProgram(unittest.TestCase):
     def setUp(self):
         char = Character("char", 128, "Hi there")
+        char_return = Character("char", 128, "Hi back")
         self.hello_prog = ServiceProgram("HELLOSRV", "DB2JSON", "HELLO")
         self.hello_prog.add_parameter(char)
+        self.hello_prog_return = ServiceProgram("HELLOSRV", "DB2JSON", "HELLOAGAIN")
+        self.hello_prog_return.add_parameter(char)
+        self.hello_prog_return.add_return(char_return)
+        
 
     def test_hello(self):
         self.assertEqual(
             self.hello_prog.get_payload(),
             {"pgm":[{"name":"HELLOSRV",  "lib":"DB2JSON", "func": "HELLO"}, {"s":{"name":"char", "type":"128a", "value":"Hi there"}}]}
+        )
+        self.assertEqual(
+            self.hello_prog_return.get_payload(),
+            {"pgm":[{"name":"HELLOSRV",  "lib":"DB2JSON", "func": "HELLOAGAIN"}, {"s":[{"name":"char", "type":"128a", "value":"Hi there"},{"name":"char", "type":"128a", "value":"Hi back", "by":"return"}]}]}
         )
 
     def test_execute_hello_world(self):
