@@ -1,6 +1,6 @@
 import unittest
 import os
-from pykit import Float
+from pykit import types
 
 
 class TestFloat(unittest.TestCase):

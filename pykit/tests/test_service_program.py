@@ -1,7 +1,7 @@
 import unittest
 import os
 from pykit.transport.http import connect
-from pykit import Character, ServiceProgram, Integer, Float
+from pykit import types
 
 
 class TestServiceProgram(unittest.TestCase):

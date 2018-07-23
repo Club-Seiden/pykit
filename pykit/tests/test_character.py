@@ -1,6 +1,6 @@
 import unittest
 import os
-from pykit import Character
+from pykit import types
 
 
 class TestCharacter(unittest.TestCase):

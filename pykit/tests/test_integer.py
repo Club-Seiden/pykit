@@ -1,6 +1,6 @@
 import unittest
 import os
-from pykit import Integer
+from pykit import types
 
 
 class TestInteger(unittest.TestCase):
