@@ -39,6 +39,7 @@ class Float(Parameter):
         self.precision = precision
         self.value = value
         self.name = str(name)
+        self.isReturn = False
         self.payload = {"name":self.name}
 
     def get_payload(self):
@@ -65,6 +66,7 @@ class Integer(Parameter):
         self.value = value
         self.name = str(name)
         self.signed = signed
+        self.isReturn = False
         self.payload = {"name":self.name}
 
     def get_payload(self):
@@ -91,6 +93,7 @@ class Character(Parameter):
         self.length = length
         self.value = value
         self.name = name
+        self.isReturn = False
         self.payload = {"name":name}
 
     def get_payload(self):
