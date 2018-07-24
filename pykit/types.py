@@ -10,14 +10,14 @@ class Parameter:
         self.value = value
         self.name = str(name)
         self.isReturn = False
+        self.byValue = False
         self.payload = {"name":self.name}
             
             
     def get_payload(self):
         self.payload['value'] = self.value
         if self.isReturn:
-            self.payload['by'] = 'return'
-            
+            self.payload['by'] = 'return'    
         if self.byValue:
             self.payload['by'] = 'val'    
         
@@ -27,7 +27,7 @@ class Float(Parameter):
     """
     Object for IBM i Float.
     """
-    def __init__(self, name, length, precision, value, byValue=False):
+    def __init__(self, name, length, precision, value):
         """
         How much error checking do we want here?
         Should we check that length is positive?
@@ -43,6 +43,7 @@ class Float(Parameter):
         self.value = value
         self.name = str(name)
         self.isReturn = False
+        self.byValue = byValue
         self.payload = {"name":self.name}
 
     def get_payload(self):
@@ -70,7 +71,7 @@ class Integer(Parameter):
         self.name = str(name)
         self.signed = signed
         self.isReturn = False
-        self.byValue = False
+        self.byValue = byValue
         self.payload = {"name":self.name}
 
     def get_payload(self):
@@ -84,7 +85,33 @@ class Character(Parameter):
     """
     Object for IBM i Character.
     """
-    def __init__(self, name, length, value, byValue=False):
+    def __init__(self, name, length, value, varying=''):
+        """
+        :param length:
+        :param value:
+        """
+        self.length = length
+        self.value = value
+        self.name = name
+        self.isReturn = False
+        self.varying = varying
+        self.byValue = byValue
+        self.payload = {"name":name}
+
+    def get_payload(self):
+        self.payload['type'] = str(self.length) + 'a'
+        if (self.varying > ''):
+            self.payload['type'] = self.payload['type'] + varying + 'v'
+            
+        Parameter.get_payload(self);
+        return self.payload
+
+
+class Decimal(Parameter):
+    """
+    Object for IBM i Decimal.
+    """
+    def __init__(self, name, length, decimals, value, signed=False):
         """
         How much error checking do we want here?
         Should we check that length is positive?
@@ -96,13 +123,16 @@ class Character(Parameter):
         """
         self.length = length
         self.value = value
-        self.name = name
+        self.name = str(name)
+        self.signed = signed
+        self.decimals = decimals
         self.isReturn = False
-        self.payload = {"name":name}
+        self.payload = {"name":self.name}
 
     def get_payload(self):
-        self.payload['type'] = str(self.length) + 'a'
+        self.payload['type'] = str(self.length) + ('s' if self.signed else 'p') + str(self.decimals)
         Parameter.get_payload(self);
+        
         return self.payload
     
     
@@ -110,7 +140,7 @@ class Binary(Parameter):
     """
     Object for IBM i Binary.
     """
-    def __init__(self, name, length, value, byValue=False):
+    def __init__(self, name, length, value):
         """
         
         :param length:
@@ -120,6 +150,7 @@ class Binary(Parameter):
         self.value = value
         self.name = name
         self.isReturn = False
+        self.byValue = byValue
         self.payload = {"name":name}
 
     def get_payload(self):
