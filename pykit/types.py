@@ -43,6 +43,7 @@ class Float(Parameter):
         self.value = value
         self.name = str(name)
         self.isReturn = False
+        self.byValue = False
         self.payload = {"name":self.name}
 
     def get_payload(self):
@@ -70,6 +71,7 @@ class Integer(Parameter):
         self.name = str(name)
         self.signed = signed
         self.isReturn = False
+        self.byValue = False
         self.payload = {"name":self.name}
 
     def get_payload(self):
@@ -92,12 +94,13 @@ class Character(Parameter):
         self.value = value
         self.name = name
         self.isReturn = False
+        self.byValue = False
         self.varying = varying
         self.payload = {"name":name}
 
     def get_payload(self):
         self.payload['type'] = str(self.length) + 'a'
-        if (self.varying > ''):
+        if self.varying:
             self.payload['type'] = self.payload['type'] + varying + 'v'
             
         Parameter.get_payload(self);
@@ -124,6 +127,7 @@ class Decimal(Parameter):
         self.signed = signed
         self.decimals = decimals
         self.isReturn = False
+        self.byValue = False
         self.payload = {"name":self.name}
 
     def get_payload(self):
@@ -147,6 +151,7 @@ class Binary(Parameter):
         self.value = value
         self.name = name
         self.isReturn = False
+        self.byValue = False
         self.payload = {"name":name}
 
     def get_payload(self):
