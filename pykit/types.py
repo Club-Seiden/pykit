@@ -43,7 +43,6 @@ class Float(Parameter):
         self.value = value
         self.name = str(name)
         self.isReturn = False
-        self.byValue = byValue
         self.payload = {"name":self.name}
 
     def get_payload(self):
@@ -56,7 +55,7 @@ class Integer(Parameter):
     """
     Object for IBM i Integer.
     """
-    def __init__(self, name, length, value, signed=True, byValue=False):
+    def __init__(self, name, length, value, signed=True):
         """
         How much error checking do we want here?
         Should we check that length is positive?
@@ -71,7 +70,6 @@ class Integer(Parameter):
         self.name = str(name)
         self.signed = signed
         self.isReturn = False
-        self.byValue = byValue
         self.payload = {"name":self.name}
 
     def get_payload(self):
@@ -95,7 +93,6 @@ class Character(Parameter):
         self.name = name
         self.isReturn = False
         self.varying = varying
-        self.byValue = byValue
         self.payload = {"name":name}
 
     def get_payload(self):
@@ -150,7 +147,6 @@ class Binary(Parameter):
         self.value = value
         self.name = name
         self.isReturn = False
-        self.byValue = byValue
         self.payload = {"name":name}
 
     def get_payload(self):

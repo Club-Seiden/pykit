@@ -32,16 +32,16 @@ class TestCharacter(unittest.TestCase):
 class TestDecimal(unittest.TestCase):
     def test_decimal_payload(self):
         dec = Decimal('adec', 10, 2, 850.2)
-        self.assertEqual(char.get_payload(), {"name":"adec", "type":"10p2", "value":850.2})
+        self.assertEqual(dec.get_payload(), {"name":"adec", "type":"10p2", "value":850.2})
 
     def test_signed_decimal_payload(self):
         dec = Decimal('bdec', 9, 0, 800, True)
-        self.assertEqual(char.get_payload(), {"name":"bdec", "type":"9p0", "value":800})
+        self.assertEqual(dec.get_payload(), {"name":"bdec", "type":"9p0", "value":800})
 
 class TestBinary(unittest.TestCase):
     def test_binary_payload(self):
         bin = Binary('abin', 2, 0000)
-        self.assertEqual(new_float.get_payload(), {"name":"abin", "type":"2b", "value":"0000"})
+        self.assertEqual(bin.get_payload(), {"name":"abin", "type":"2b", "value":"0000"})
 
 
 
