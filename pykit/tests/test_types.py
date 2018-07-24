@@ -36,11 +36,11 @@ class TestDecimal(unittest.TestCase):
 
     def test_signed_decimal_payload(self):
         dec = Decimal('bdec', 9, 0, 800, True)
-        self.assertEqual(dec.get_payload(), {"name":"bdec", "type":"9p0", "value":800})
+        self.assertEqual(dec.get_payload(), {"name":"bdec", "type":"9s0", "value":800})
 
 class TestBinary(unittest.TestCase):
     def test_binary_payload(self):
-        bin = Binary('abin', 2, 0000)
+        bin = Binary('abin', 2, "0000")
         self.assertEqual(bin.get_payload(), {"name":"abin", "type":"2b", "value":"0000"})
 
 
