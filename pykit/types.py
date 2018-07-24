@@ -101,7 +101,7 @@ class Character(Parameter):
     def get_payload(self):
         self.payload['type'] = str(self.length) + 'a'
         if self.varying:
-            self.payload['type'] = self.payload['type'] + 'v' + self.varying
+            self.payload['type'] = self.payload['type'] + 'v' + str(self.varying)
             
         Parameter.get_payload(self);
         return self.payload
