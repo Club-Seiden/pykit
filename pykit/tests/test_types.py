@@ -26,7 +26,7 @@ class TestCharacter(unittest.TestCase):
 
     def test_character_varying_payload(self):
         char = Character('bchar', 100, "Bye", 2)
-        self.assertEqual(char.get_payload(), {"name":"bchar", "type":"10av2", "value":"Bye"})
+        self.assertEqual(char.get_payload(), {"name":"bchar", "type":"100av2", "value":"Bye"})
 
 
 class TestDecimal(unittest.TestCase):
