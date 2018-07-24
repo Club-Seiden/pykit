@@ -62,13 +62,9 @@ class Integer(Parameter):
         :param length:
         :param value:
         """
+        Parameter.__init__(self, name, value)
         self.length = length
-        self.value = value
-        self.name = str(name)
         self.signed = signed
-        self.isReturn = False
-        self.byValue = False
-        self.payload = {"name":self.name}
 
     def get_payload(self):
         self.payload['type'] = str(self.length) + ('i' if self.signed else 'u') + '0'
@@ -86,13 +82,9 @@ class Character(Parameter):
         :param length:
         :param value:
         """
+        Parameter.__init__(self, name, value)
         self.length = length
-        self.value = value
-        self.name = name
-        self.isReturn = False
-        self.byValue = False
         self.varying = varying
-        self.payload = {"name":name}
 
     def get_payload(self):
         self.payload['type'] = str(self.length) + 'a'
@@ -117,14 +109,10 @@ class Decimal(Parameter):
         :param length:
         :param value:
         """
+        Parameter.__init__(self, name, value)
         self.length = length
-        self.value = value
-        self.name = str(name)
         self.signed = signed
         self.decimals = decimals
-        self.isReturn = False
-        self.byValue = False
-        self.payload = {"name":self.name}
 
     def get_payload(self):
         self.payload['type'] = str(self.length) + ('s' if self.signed else 'p') + str(self.decimals)
@@ -143,12 +131,8 @@ class Binary(Parameter):
         :param length:
         :param value:
         """
+        Parameter.__init__(self, name, value)
         self.length = length
-        self.value = value
-        self.name = name
-        self.isReturn = False
-        self.byValue = False
-        self.payload = {"name":name}
 
     def get_payload(self):
         self.payload['type'] = str(self.length) + 'b'
