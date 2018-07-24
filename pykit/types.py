@@ -35,20 +35,16 @@ class Float(Parameter):
         Should we truncate the value to the length?
 
         :param length:
-        :param precision:
+        :param precision:s
         :param value:
         """
+        Parameter.__init__(self, name, value)
         self.length = length
         self.precision = precision
-        self.value = value
-        self.name = str(name)
-        self.isReturn = False
-        self.byValue = False
-        self.payload = {"name":self.name}
 
     def get_payload(self):
         self.payload['type'] = str(self.length) + 'f' + str(self.precision)
-        Parameter.get_payload(self);
+        Parameter.get_payload(self)
         return self.payload
     
 
@@ -76,7 +72,7 @@ class Integer(Parameter):
 
     def get_payload(self):
         self.payload['type'] = str(self.length) + ('i' if self.signed else 'u') + '0'
-        Parameter.get_payload(self);
+        Parameter.get_payload(self)
         
         return self.payload
 
@@ -103,7 +99,7 @@ class Character(Parameter):
         if self.varying:
             self.payload['type'] = self.payload['type'] + 'v' + str(self.varying)
             
-        Parameter.get_payload(self);
+        Parameter.get_payload(self)
         return self.payload
 
 
@@ -132,7 +128,7 @@ class Decimal(Parameter):
 
     def get_payload(self):
         self.payload['type'] = str(self.length) + ('s' if self.signed else 'p') + str(self.decimals)
-        Parameter.get_payload(self);
+        Parameter.get_payload(self)
         
         return self.payload
     
@@ -156,7 +152,7 @@ class Binary(Parameter):
 
     def get_payload(self):
         self.payload['type'] = str(self.length) + 'b'
-        Parameter.get_payload(self);
+        Parameter.get_payload(self)
         return self.payload    
     
     
