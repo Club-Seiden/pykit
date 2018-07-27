@@ -1,6 +1,6 @@
 import unittest
 import os
-from pykit import Integer, Float, Character, Decimal, Binary
+from pykit import Integer, Float, Character, Decimal, Binary, Parameter
 
 
 class TestInteger(unittest.TestCase):
