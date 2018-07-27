@@ -12,7 +12,7 @@ class TestServiceProgram(unittest.TestCase):
         self.hello_prog.add_parameter(char)
         self.hello_prog_return = ServiceProgram("HELLOSRV", "DB2JSON", "HELLOAGAIN")
         self.hello_prog_return.add_parameter(char)
-        self.hello_prog_return.add_return(char_return)
+        self.hello_prog_return.add_parameter(char_return)
         
 
     def test_hello(self):
