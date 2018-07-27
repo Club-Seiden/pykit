@@ -6,7 +6,7 @@ from pykit import *
 
 class TestProgram(unittest.TestCase):
     def setUp(self):
-        char = Character("char", 128, "Hi there")
+        char = Parameter(Character("char", 128, "Hi there"))
         self.hello_prog = Program("HELLO", "DB2JSON")
         self.hello_prog.add_parameter(char)
 
@@ -18,9 +18,9 @@ class TestProgram(unittest.TestCase):
 
     # WIP
     def test_rainbow(self):
-        int = Integer("aint8", 3, 1)
-        float = Float("afloat", 4, 2, 5.55)
-        char = Character("achar", 32, "A")
+        int = Parameter(Integer("aint8", 3, 1))
+        float = Parameter(Float("afloat", 4, 2, 5.55))
+        char = Parameter(Character("achar", 32, "A"))
         rainbow = Program("RAINBOW", "DB2JSON")
         rainbow.add_parameter(int)
         rainbow.add_parameter(float)

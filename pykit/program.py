@@ -18,15 +18,6 @@ class Program:
         """
         self.parameters.append(parameter)
 
-    def add_parameter_by_value(self, parameter):
-        """
-
-        :param parameter: Parameter to be added
-        :return:
-        """
-        parameter.byValue = True
-        self.parameters.append(parameter)
-
 
     def get_payload(self):
         if len(self.parameters) is 1:
@@ -50,14 +41,5 @@ class ServiceProgram(Program):
         self.payload = {
             "pgm": [{"name": name, "lib": library, "func": function}]
         }
-
-    def add_return(self, parameter):
-        """
-
-        :param parameter: Return parameter to be added
-        :return:
-        """
-        parameter.isReturn = True
-        self.parameters.append(parameter)
         
     

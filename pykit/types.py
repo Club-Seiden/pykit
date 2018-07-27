@@ -1,6 +1,28 @@
 class Parameter:
+    def __init__(self, parameterType, direction='inout', byValue=False, isReturn=False):
+        """
+        :param name:
+        :param value:
+        """
+        self.parameterType = parameterType
+        self.direction = direction
+        self.isReturn = isReturn
+        self.byValue = False
+        self.payload = {"name":self.name}
+    
+    def get_payload(self):
+        self.payload = self.parameterType.get_payload()
+        if self.isReturn:
+            self.payload['by'] = 'return'    
+        if self.byValue:
+            self.payload['by'] = 'val'    
+        
+        return self.payload
+    
+
+class ParameterType:
     """
-    Object for IBM i Parameters.
+    Object for IBM i ParameterTypes.
     """
     def __init__(self, name, value):
         """
@@ -9,21 +31,14 @@ class Parameter:
         """
         self.value = value
         self.name = str(name)
-        self.isReturn = False
-        self.byValue = False
         self.payload = {"name":self.name}
             
             
     def get_payload(self):
-        self.payload['value'] = self.value
-        if self.isReturn:
-            self.payload['by'] = 'return'    
-        if self.byValue:
-            self.payload['by'] = 'val'    
-        
+        self.payload['value'] = self.value        
         return self.payload
     
-class Float(Parameter):
+class Float(ParameterType):
     """
     Object for IBM i Float.
     """
@@ -38,17 +53,17 @@ class Float(Parameter):
         :param precision:s
         :param value:
         """
-        Parameter.__init__(self, name, value)
+        ParameterType.__init__(self, name, value)
         self.length = length
         self.precision = precision
 
     def get_payload(self):
         self.payload['type'] = str(self.length) + 'f' + str(self.precision)
-        Parameter.get_payload(self)
+        ParameterType.get_payload(self)
         return self.payload
     
 
-class Integer(Parameter):
+class Integer(ParameterType):
     """
     Object for IBM i Integer.
     """
@@ -62,18 +77,18 @@ class Integer(Parameter):
         :param length:
         :param value:
         """
-        Parameter.__init__(self, name, value)
+        ParameterType.__init__(self, name, value)
         self.length = length
         self.signed = signed
 
     def get_payload(self):
         self.payload['type'] = str(self.length) + ('i' if self.signed else 'u') + '0'
-        Parameter.get_payload(self)
+        ParameterType.get_payload(self)
         
         return self.payload
 
 
-class Character(Parameter):
+class Character(ParameterType):
     """
     Object for IBM i Character.
     """
@@ -82,7 +97,7 @@ class Character(Parameter):
         :param length:
         :param value:
         """
-        Parameter.__init__(self, name, value)
+        ParameterType.__init__(self, name, value)
         self.length = length
         self.varying = varying
 
@@ -91,11 +106,11 @@ class Character(Parameter):
         if self.varying:
             self.payload['type'] = self.payload['type'] + 'v' + str(self.varying)
             
-        Parameter.get_payload(self)
+        ParameterType.get_payload(self)
         return self.payload
 
 
-class Decimal(Parameter):
+class Decimal(ParameterType):
     """
     Object for IBM i Decimal.
     """
@@ -109,19 +124,19 @@ class Decimal(Parameter):
         :param length:
         :param value:
         """
-        Parameter.__init__(self, name, value)
+        ParameterType.__init__(self, name, value)
         self.length = length
         self.signed = signed
         self.decimals = decimals
 
     def get_payload(self):
         self.payload['type'] = str(self.length) + ('s' if self.signed else 'p') + str(self.decimals)
-        Parameter.get_payload(self)
+        ParameterType.get_payload(self)
         
         return self.payload
     
     
-class Binary(Parameter):
+class Binary(ParameterType):
     """
     Object for IBM i Binary.
     """
@@ -131,12 +146,12 @@ class Binary(Parameter):
         :param length:
         :param value:
         """
-        Parameter.__init__(self, name, value)
+        ParameterType.__init__(self, name, value)
         self.length = length
 
     def get_payload(self):
         self.payload['type'] = str(self.length) + 'b'
-        Parameter.get_payload(self)
+        ParameterType.get_payload(self)
         return self.payload    
     
     

@@ -6,8 +6,8 @@ from pykit import *
 
 class TestServiceProgram(unittest.TestCase):
     def setUp(self):
-        char = Character("char", 128, "Hi there")
-        char_return = Character("char", 128, "Hi back")
+        char = Parameter(Character("char", 128, "Hi there"))
+        char_return = Parameter(Character("char", 128, "Hi back"),  direction='out', byValue=False, isReturn=True)
         self.hello_prog = ServiceProgram("HELLOSRV", "DB2JSON", "HELLO")
         self.hello_prog.add_parameter(char)
         self.hello_prog_return = ServiceProgram("HELLOSRV", "DB2JSON", "HELLOAGAIN")
