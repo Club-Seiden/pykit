@@ -8,7 +8,7 @@ class Parameter:
         self.direction = direction
         self.isReturn = isReturn
         self.byValue = False
-        self.payload = {"name":self.name}
+        self.payload = {}
     
     def get_payload(self):
         self.payload = self.parameterType.get_payload()
