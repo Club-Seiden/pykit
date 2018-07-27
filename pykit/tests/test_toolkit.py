@@ -3,7 +3,7 @@ import os
 from pykit.transport.http import connect
 
 
-class TestHttpConnection(unittest.TestCase):
+class TestToolkit(unittest.TestCase):
     def setUp(self):
         self.connection = connect(
             os.environ['PK_DB2SOCK_URL'],
