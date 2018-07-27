@@ -5,5 +5,6 @@ from .types import Float
 from .types import Character
 from .types import Decimal
 from .types import Binary
+from .types import Parameter
 from .program import Program
 from .program import ServiceProgram
