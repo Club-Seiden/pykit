@@ -1,6 +1,6 @@
 import unittest
 import os
-from pykit.transport.http import connect
+from pykit.transport.db2 import connect
 
 
 class TestDb2Connection(unittest.TestCase):
@@ -17,7 +17,6 @@ class TestDb2Connection(unittest.TestCase):
         toolkit = self.connection.toolkit()
         toolkit.add(payload)
         response = toolkit.execute()
-        self.assertTrue(response)
 
 
         self.assertTrue(response)

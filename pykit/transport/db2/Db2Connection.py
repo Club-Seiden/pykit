@@ -1,5 +1,9 @@
 import requests
 from ...Toolkit import Toolkit
+import ibm_db
+import ibm_db_dbi as dbi
+
+
 
 
 class Db2Connection:
@@ -8,9 +12,9 @@ class Db2Connection:
     Toolkit object.
     """
 
-    def __init__(self, db2sock_database, db2sock_auth):
-        self.db2sock_auth = db2sock_auth
-        self.db2sock_database = db2sock_database
+    def __init__(self, database='*LOCAL', username='', password=''):
+        db2_connection = dbi.connect(database, username, password)
+        self.connection = ibm_db_dbi.Connection(db2_connection)
         self.__test_connection()
 
     def toolkit(self):
@@ -27,12 +31,15 @@ class Db2Connection:
 
         :return: dict
         """
-        response = requests.post(
-            self.db2sock_rest_url, json=payload, auth=self.db2sock_auth)
+        cur = conn.cursor()
+
+        cur.execute("call DB2JSON.DB2PROCJ(?)", (payload))
+        result = cur.fetchall()
+        """
         if not response.ok:
             raise TransportError("There was an error while executing the payload.")
-
-        return response.json()
+        """
+        return result.json()
 
     def __test_connection(self):
         """
