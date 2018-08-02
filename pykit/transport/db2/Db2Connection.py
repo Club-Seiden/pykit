@@ -13,10 +13,9 @@ class Db2Connection:
     """
 
     def __init__(self, database='*LOCAL', username='', password=''):
-        db2_connection = dbi.connect(database, username, password)
-        self.connection = ibm_db_dbi.Connection(db2_connection)
-        self.__test_connection()
-
+        db2_connection = ibm_db.connect(database, username, password)
+        self.connection = dbi.Connection(db2_connection)
+        
     def toolkit(self):
         """
         Return an instance of the toolkit with a connection defined.
@@ -31,7 +30,7 @@ class Db2Connection:
 
         :return: dict
         """
-        cur = conn.cursor()
+        cur = self.connection.cursor()
 
         cur.execute("call DB2JSON.DB2PROCJ(?)", (payload))
         result = cur.fetchall()
