@@ -5,7 +5,7 @@ from pykit.transport.db2 import connect
 
 class TestDb2Connection(unittest.TestCase):
     def setUp(self):
-        self.connection = connect('', '', '')
+        self.connection = connect()
 
     def test_execute_payload(self):
         payload = {
