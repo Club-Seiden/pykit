@@ -1,6 +1,5 @@
 import requests
 from ...Toolkit import Toolkit
-import ibm_db
 import ibm_db_dbi as dbi
 
 
@@ -12,9 +11,10 @@ class Db2Connection:
     Toolkit object.
     """
 
-    def __init__(self, database='*LOCAL', username='', password=''):
-        db2_connection = ibm_db.connect(database, username, password)
-        self.connection = dbi.Connection(db2_connection)
+    def __init__(self, database='*LOCAL', username=None, password=None):
+        
+        self.connection = dbi.connect(dsn=None, database=database, \
+                       user=username, password=password)
         
     def toolkit(self):
         """
