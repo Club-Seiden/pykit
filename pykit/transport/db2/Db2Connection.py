@@ -13,7 +13,7 @@ class Db2Connection:
 
     def __init__(self, database='*LOCAL', username=None, password=None):
         
-        self.connection = dbi.connect(dsn=None, database=database, \
+        self.connection = dbi.connect(database=database, \
                        user=username, password=password)
         
     def toolkit(self):
