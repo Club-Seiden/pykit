@@ -1,7 +1,7 @@
 import requests
+import json
 from ...Toolkit import Toolkit
 import ibm_db_dbi as dbi
-import ibm_db as db2
 
 
 
@@ -16,7 +16,6 @@ class Db2Connection:
         
         self.connection = dbi.connect(database=database, \
                        user=username, password=password)
-        self.connection_two = db2.connect('*LOCAL', 'alan', 'wiscon1')
         
     def toolkit(self):
         """
@@ -33,38 +32,17 @@ class Db2Connection:
         :return: dict
         """
         payload_string = str(payload)
-        print(payload_string)
-        payload_string = """
-        {
-            'pgm': [
-                {'name': 'HELLO', 'lib': 'DB2JSON'},
-                {'s': {'name': 'char', 'type': '128a', 'value': 'Hi there'}}
-            ]
-        }  
-        """
         
         cur = self.connection.cursor()
-        sql = "call DB2JSON.DB2PROCJ(?)"
-        cur.callproc('DB2JSON.DB2PROCJ', (payload_string,))
-        stmt = db2.prepare(self.connection_two, sql)
-        db2.bind_param(stmt, 1, payload_string)
-        db2.execute(stmt)
-        result = db2.fetch_tuple(stmt)
-        print(result[0])
-        #print(db2.result(stmt, 0))
-        
-        
-        
-        
+        cur.callproc('DB2JSON.DB2PROCJR', (payload_string,))
         
         result = cur.fetchone()
-        #cur.execute("call DB2JSON.DB2PROCJ(?)", (str(payload),))
-        #result = cur.fetchall()
+        
         """
         if not response.ok:
             raise TransportError("There was an error while executing the payload.")
         """
-        return result.json()
+        return json.loads(result[0])
 
     def __test_connection(self):
         """
