@@ -7,7 +7,7 @@ PyKit is a Python wrapper for [DB2Sock](https://bitbucket.org/litmis/db2sock).
 > As of major version zero, PyKit only supports an HTTP REST transport. Before
 trying to use PyKit, please be sure to have DB2Sock up and running with an HTTP
 transport available. Follow the
-[DB2Sock Instlalation Instructions](https://bitbucket.org/litmis/db2sock#markdown-header-yips-pre-compiled-test-vesion)
+[DB2Sock Installation Instructions](https://bitbucket.org/litmis/db2sock#markdown-header-yips-pre-compiled-test-vesion)
 and
 [setup](https://bitbucket.org/litmis/db2sock/src/8361279737df4f9a7cffe02fa164ad21f1d0c2b0/toolkit/fastcgi/?at=master)
 either nginx or apache.
